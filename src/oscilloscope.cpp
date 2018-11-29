@@ -4113,8 +4113,6 @@ void Oscilloscope::writeAllSettingsToHardware()
 
 		/*iio_device_attr_write_longlong(adc->iio_adc_dev(),
 			"oversampling_ratio", 1);*/
-
-		m2k_adc->setSampleRate(active_sample_rate);
 	}
 
 	// Writes all trigger settings to hardware
