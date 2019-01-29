@@ -45,12 +45,12 @@
 #include "pattern_generator.hpp"
 #include "network_analyzer.hpp"
 #include "digitalio.hpp"
-#include "menuoption.h"
 #include "detachedWindow.hpp"
 #include "preferences.h"
 #include "info_page.hpp"
 #include "device_widget.hpp"
 #include "connectDialog.hpp"
+#include "toolmenu.h"
 
 extern "C" {
 	struct iio_context;
@@ -97,7 +97,6 @@ Q_SIGNALS:
 	void launcherClosed();
 
 public Q_SLOTS:
-	void detachToolOnPosition(int);
 	void addDebugWindow(void);
 
 	void loadSession();
@@ -109,7 +108,6 @@ private Q_SLOTS:
 	void search();
 	void update();
 	void ping();
-	void highlightLast(bool on);
 
 	void btnOscilloscope_clicked();
 	void btnSignalGenerator_clicked();
@@ -138,8 +136,6 @@ private Q_SLOTS:
 
 	void btnDigitalIO_clicked();
 
-	void swapMenuOptions(int source, int destination, bool dropAfter);
-	void highlight(bool on, int position);
 	void resetSession();
 	DeviceWidget* getConnectedDevice();
 	DeviceWidget* getSelectedDevice();
@@ -147,6 +143,7 @@ private Q_SLOTS:
 	void pageMoved(int);
 	void stopSearching(bool);
 
+	void _toolSelected(tool tool);
 private:
 	void loadToolTips(bool connected);
 	QVector<QString> searchDevices();
@@ -161,15 +158,9 @@ private:
 	void saveSettings();
 	Q_INVOKABLE QPushButton *addContext(const QString& hostname);
 
-	QList<QString> getOrder();
-	void setOrder(QList<QString> list);
-
 	void updateListOfDevices(const QVector<QString>& uris);
-	void generateMenu();
 	QStringList tools;
 	QStringList toolIcons;
-	void UpdatePosition(QWidget *widget, int position);
-	void insertMenuOptions();
 	void closeEvent(QCloseEvent *event);
 	void highlightDevice(QPushButton *btn);
 	void setupHomepage();
@@ -184,7 +175,8 @@ private:
 	Ui::ToolLauncher *ui;
 	struct iio_context *ctx;
 
-	QMap<QString, MenuOption*> toolMenu;
+	ToolMenu *menu;
+
 	QVector<int> position;
 	QVector<Debugger*> debugInstances;
 	QVector<DetachedWindow *> debugWindows;
@@ -245,6 +237,7 @@ private:
 	QButtonGroup *devices_btn_group;
 
 	DeviceWidget* selectedDev;
+        void _setupToolMenu();
 };
 }
 #endif // M2K_TOOL_LAUNCHER_H
