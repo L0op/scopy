@@ -157,8 +157,8 @@ PowerController::~PowerController()
 	if (dev3) {
 		struct iio_channel *chan;
 		/* These are the two ADC amplifiers */
-		chan = iio_device_find_channel(dev3, "voltage0", false);
-		if (chan)
+		chan = iio_device_find_channel(dev3, "voltge0", false);
+		//if (chan)
 			iio_channel_attr_write_bool(chan, "powerdown", true);
 
 		chan = iio_device_find_channel(dev3, "voltage1", false);
