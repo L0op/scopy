@@ -1,7 +1,7 @@
 clone_depth: 1
 
-#init:
-    #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+init:
+    - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 install:
     # Remove dependencies that prevent us from upgrading to GCC 6.2
@@ -111,5 +111,5 @@ build_script:
     - ISCC /Q C:\build_32\scopy.iss
     - appveyor PushArtifact C:\scopy-setup.exe
 
-#on_finish:
-    #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+on_finish:
+    - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
