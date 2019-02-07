@@ -77,6 +77,7 @@ build_script:
     - C:\msys64\usr\bin\bash -lc "dump_syms /c/scopy_64/Scopy.exe > /c/debug/x64/Scopy.exe.sym"
     - C:\msys64\usr\bin\bash -lc "objcopy --only-keep-debug /c/scopy_64/Scopy.exe /c/debug/x64/Scopy.exe.debug"
     - C:\msys64\usr\bin\bash -lc "strip --strip-debug --strip-unneeded /c/scopy_64/Scopy.exe"
+    - C:\msys64\usr\bin\bash -lc "objcopy --add-gnu-debuglink=\"debug/x64/Scopy.exe.debug\" Scopy.exe"
 
     - 7z a "c:\scopy-64bit.zip" c:\scopy_64
     - appveyor PushArtifact c:\scopy-64bit.zip
@@ -98,6 +99,7 @@ build_script:
     - mkdir C:\debug\x86  
     - C:\msys64\usr\bin\bash -lc "objcopy --only-keep-debug /c/scopy_32/Scopy.exe /c/debug/x86/Scopy.exe.debug"
     - C:\msys64\usr\bin\bash -lc "strip --strip-debug --strip-unneeded /c/scopy_32/Scopy.exe"
+    - C:\msys64\usr\bin\bash -lc "objcopy --add-gnu-debuglink=\"debug/x86/Scopy.exe.debug\" Scopy.exe"
 
     - 7z a "c:\scopy-32bit.zip" c:\scopy_32
     - appveyor PushArtifact c:\scopy-32bit.zip
