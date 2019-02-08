@@ -75,7 +75,7 @@ build_script:
     - mkdir C:\scopy_64\.debug
     - C:\msys64\usr\bin\bash -lc "dump_syms /c/scopy_64/Scopy.exe > /c/scopy_64/Scopy.exe.sym"
     - timeout 4
-      #    - ps: C:\msys64\mingw64\bin\objcopy.exe -v --only-keep-debug "C:\scopy_64\Scopy.exe" "C:\scopy_64\.debug\Scopy.exe.debug"
+    - C:\msys64\usr\bin\bash -lc "objcopy -v --only-keep-debug /c/scopy_64/Scopy.exe /c/scopy_64/.debug/Scopy.exe.debug"
     - ps: C:\msys64\mingw64\bin\strip.exe --strip-debug --strip-unneeded "C:\scopy_64\Scopy.exe"
       #    - ps: C:\msys64\mingw64\bin\objcopy.exe -v --add-gnu-debuglink="C:\scopy_64\.debug\Scopy.exe.debug" "C:\scopy_64\Scopy.exe"
     - mkdir C:\debug_64
@@ -103,9 +103,9 @@ build_script:
     - mkdir C:\scopy_32\.debug
     - C:\msys64\usr\bin\bash -lc "dump_syms /c/scopy_32/Scopy.exe > /c/scopy_32/Scopy.exe.sym"
     - timeout 4
-      #    - ps: C:\msys64\mingw64\bin\objcopy.exe -v --only-keep-debug "C:\scopy_32\Scopy.exe" "C:\scopy_32\.debug\Scopy.exe.debug"
+      #    - ps: C:\msys64\mingw32\bin\objcopy.exe -v --only-keep-debug "C:\scopy_32\Scopy.exe" "C:\scopy_32\.debug\Scopy.exe.debug"
     - ps: C:\msys64\mingw64\bin\strip.exe --strip-debug --strip-unneeded "C:\scopy_32\Scopy.exe"
-      #    - ps: C:\msys64\mingw64\bin\objcopy.exe -v --add-gnu-debuglink="C:\scopy_32\.debug\Scopy.exe.debug" "C:\scopy_32\Scopy.exe"
+      #    - ps: C:\msys64\mingw32\bin\objcopy.exe -v --add-gnu-debuglink="C:\scopy_32\.debug\Scopy.exe.debug" "C:\scopy_32\Scopy.exe"
     - mkdir C:\debug_32
     - mv C:\scopy_32\Scopy.exe.sym C:\debug_32
     - mv C:\scopy_32\.debug C:\debug_32
